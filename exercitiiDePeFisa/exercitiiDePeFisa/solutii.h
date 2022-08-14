@@ -18,7 +18,7 @@
 // de sud a matricei?
 // h) Cate elemente pare sunt in regiunea
 // de est a matricei?
-// Care este cel mai mare element din vestul
+// i) Care este cel mai mare element din vestul
 // matricei?
 
 // 1-a
@@ -68,4 +68,64 @@ void solutiepb1d() {
 	citireFisier(x, m, n);
 	afisareMatrice(x, m, n);
 	cout << "Sub diagonala secundara exista " << countElemSuperPrimeSubDiagSec(x, m, n) << " elemente superprime." << endl;
+}
+
+// 1-e
+// Care este suma elementelor situate
+// deasupra diagonalei secundare?
+
+void solutiepb1e() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Suma elementelor situate deasupra diagonalei secundare este : " << sumaElementeDeasupraDiagSec(x, m, n) << "." << endl;
+}
+
+// 1-f
+// Afisati media aritmetica a elementelor din
+// regiunea de nord a matricei.
+
+void solutiepb1f() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Media aritmetica a elementelor din regiunea de nord a matricei este : " << mediaAritElementeNord(x, m, n) << "." << endl;
+}
+
+// 1-g
+// Cate elemente negative sunt in regiunea
+// de sud a matricei?
+
+void solutiepb1g() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "In regiunea de sud exista " << countNegativeRegiuneSud(x, m, n) << " elemente negative." << endl;
+}
+
+// 1-h
+// Cate elemente pare sunt in regiunea
+// de est a matricei?
+
+void solutiepb1h() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "In regiunea de est exista " << countPareRegiuneEst(x, m, n) << " elemente pare." << endl;
+}
+
+// 1-i
+// Care este cel mai mare element din vestul
+// matricei?
+
+void solutiepb1i() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Cel mai mare element din vestul matricei este : " << celMaiMareRegiuneVest(x, m, n) << "." << endl;
 }

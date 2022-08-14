@@ -104,14 +104,9 @@ void afisareMatriceTriunghiDeasupraDiagSec(int x[100][100], int m, int n) {
 // Afisare triunghi din nord.
 
 void afisareMatriceTriunghiNord(int x[100][100], int m, int n) {
-	int z = m / 2 - 1;
-	if (m % 2 == 0) {
-		z++;
-	}
-	for (int i = 0, j = n - 1; i < z; i++, j--) {
-		for (int k = i; k < j + 1; k++) {
-			cout << x[i][k];
-			cout << " ";
+	for (int i = 0, j = n; i < m / 2 + 1; i++, j--) {
+		for (int k = i; k < j; k++) {
+			cout << x[i][k] << " ";
 		}
 		cout << endl;
 	}
@@ -120,20 +115,32 @@ void afisareMatriceTriunghiNord(int x[100][100], int m, int n) {
 // Afisare triunghi din vest.
 
 void afisareMatriceTriunghiVest(int x[100][100], int m, int n) {
-	int c = 0;
-	for (int i = 0, j = 0; i < m; i++) {
-		for (int k = 0; k < j + 1; k++) {
-			cout << x[i][k];
-			cout << " ";
+	int z = m / 2;
+	if (m % 2 == 0) {
+		z--;
+	}
+	for (int i = 0, j = n - 1, r = 0; i < m; i++) {
+		for (int k = j; k < n; k++) {
+			cout << x[i][k] << " ";
 		}
-		if (m % 2 == 0 && i > m / 2 - 2) {
-			c++;
+		if (m % 2 == 0) {
+			if (i >= z) {
+				r++;
+			}
+			if (r == 0) {
+				j--;
+			}
+			if (r > 1) {
+				j++;
+			}
 		}
-		if (c == 0) {
-			j++;
-		}
-		if (c >= 2) {
-			j--;
+		else {
+			if (i < z) {
+				j--;
+			}
+			else {
+				j++;
+			}
 		}
 		cout << endl;
 	}
@@ -142,14 +149,13 @@ void afisareMatriceTriunghiVest(int x[100][100], int m, int n) {
 // Afisare triunghi din sud.
 
 void afisareMatriceTriunghiSud(int x[100][100], int m, int n) {
-	int z = m / 2 - 1;
+	int z = 0;
 	if (m % 2 == 0) {
 		z++;
 	}
-	for (int i = z, j = z; i < m; i++, j--) {
-		for (int k = j - 1; k < i + 1; k++) {
-			cout << x[i][k];
-			cout << " ";
+	for (int i = m / 2, j = i - z; i < m; i++, j--) {
+		for (int k = j; k < i + 1; k++) {
+			cout << x[i][k] << " ";
 		}
 		cout << endl;
 	}
@@ -158,24 +164,32 @@ void afisareMatriceTriunghiSud(int x[100][100], int m, int n) {
 // Afisare triunghi din est.
 
 void afisareMatriceTriunghiEst(int x[100][100], int m, int n) {
-	int z = m / 2 - 1;
+	int z = m / 2;
 	if (m % 2 == 0) {
-		z++;
+		z--;
 	}
-	int c = 0;
-	for (int i = 0, j = z; i < m; i++) {
-		for (int k = n - 1; k > j + 1; k--) {
-			cout << x[i][k];
-			cout << " ";
+	for (int i = 0, j = n - 1, r = 0; i < m; i++) {
+		for (int k = j; k < n; k++) {
+			cout << x[i][k] << " ";
 		}
-		if (m % 2 == 0 && i > m / 2 - 2) {
-			c++;
+		if (m % 2 == 0) {
+			if (i >= z) {
+				r++;
+			}
+			if (r == 0) {
+				j--;
+			}
+			if (r > 1) {
+				j++;
+			}
 		}
-		if (c == 0) {
-			j--;
-		}
-		if (c >= 2) {
-			j++;
+		else {
+			if (i < z) {
+				j--;
+			}
+			else {
+				j++;
+			}
 		}
 		cout << endl;
 	}

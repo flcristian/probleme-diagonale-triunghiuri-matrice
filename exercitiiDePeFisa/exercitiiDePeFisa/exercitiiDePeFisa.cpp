@@ -2,5 +2,5 @@
 
 int main()
 {
-    solutiepb1d();
+    solutiepb1i();
 }
