@@ -119,8 +119,8 @@ void afisareMatriceTriunghiVest(int x[100][100], int m, int n) {
 	if (m % 2 == 0) {
 		z--;
 	}
-	for (int i = 0, j = n - 1, r = 0; i < m; i++) {
-		for (int k = j; k < n; k++) {
+	for (int i = 0, j = 1, r = 0; i < m; i++) {
+		for (int k = 0; k < j; k++) {
 			cout << x[i][k] << " ";
 		}
 		if (m % 2 == 0) {
@@ -128,18 +128,18 @@ void afisareMatriceTriunghiVest(int x[100][100], int m, int n) {
 				r++;
 			}
 			if (r == 0) {
-				j--;
+				j++;
 			}
 			if (r > 1) {
-				j++;
+				j--;
 			}
 		}
 		else {
-			if (i < z) {
-				j--;
+			if (i < z) 
+				j++;
 			}
 			else {
-				j++;
+				j--;
 			}
 		}
 		cout << endl;

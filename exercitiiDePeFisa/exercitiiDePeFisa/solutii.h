@@ -129,3 +129,101 @@ void solutiepb1i() {
 	afisareMatrice(x, m, n);
 	cout << "Cel mai mare element din vestul matricei este : " << celMaiMareRegiuneVest(x, m, n) << "." << endl;
 }
+
+// 2. Sa se citeasca o matrice patratica de maxim
+// 1000x1000 de elemente numere intregi.
+// a) Care este cmmdc-ul tuturor elementelor de pe diagonala
+// principala?
+// b) Sa se verifice daca matricea este simetrica fata de
+// diagonala I.
+// c) Afisati triunghiul isoscel cu maximul de numere
+// ce au prima cifra egala cu ultima cifra.
+// d) Sa se inlocuiasca toate aparitiile lui k din triunghiul
+// dreptunghic inferior diagonalei secundare cu cifra de 
+// control. (k citit de la tastatura)
+// e) Care este numarul cu cele mai multe cifre distincte
+// de pe diagonala secundara?
+// f) Sa se verifice daca pe fiecare linie si pe fiecare
+// coloana sunt elementele {1, ..., 9} o singura data
+// (Tip Sudoku)
+// g) Sa se realizeze un vector cu toate elementele
+// ce au cifra de control un numar par.
+// h) Sortati vectorul de la punctul g. crescator pana la
+// mijloc si descrescator dupa (metodele cu care se 
+// va sorta acest vector trebuie sa fie diferite pentru
+// cele doua sortari)
+// i) Interschimbati toate elementele din triunghiul
+// superior diagonalei principale cu elementele
+// din triunghiul inferior diagonalei secundare.
+// j) Interschimbati toate elementele de minim din N
+// cu toate elementele de maxim din S.
+// k) Sortati descrescator diagonala secundara in functie
+// de suma cifrelor din elemente.
+// l) Care este triunghiul isoscel ce are cea mai mare
+// frecventa a cifrei k? (k citit de la tastatura)
+// m) Matricea B este transpusa matricei A. B = ?
+// n) Afisati mesajul DA daca elementele de pe diagonala
+// principala sunt multiplii celor de pe diagonala
+// secundara. Metoda de comparare este urmatoarea
+// a[0][0] cu a[0][n-1], a[1][1] cu a[1][n-2], etc.
+
+// 2-a
+// Care este cmmdc-ul tuturor elementelor de pe diagonala
+// principala?
+
+void solutiepb2a() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Cel mai mare divizor comun al elementelor de pe diagonala principala este : " << cmmdcDiagPrincipala(x, m, n) << "." << endl;
+}
+
+// 2-b
+// Sa se verifice daca matricea este simetrica fata de
+// diagonala I.
+
+void solutiepb2b() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Matricea";
+	if (simetricaFataDeDiagPrin(x, m, n)) {
+		cout << " este ";
+	}
+	else {
+		cout << " nu este ";
+	}
+	cout << "simetrica fata de diagonala principala." << endl;
+}
+
+// 2-c
+// Afisati triunghiul isoscel cu maximul de numere
+// ce au prima cifra egala cu ultima cifra.
+
+void solutiepb2c() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	int indice = careTriunghiMaxNrPrimaUltima(x, m, n);
+	cout << endl;
+	cout << "Triunghiul cu maximul de numere ce au prima cifra egala cu ultima este cel din ";
+	if (indice == 1) {
+		cout << "nord." << endl << endl;
+		afisareTriunghiNord(x, m, n);
+	}
+	if (indice == 2) {
+		cout << "vest." << endl << endl;
+		afisareTriunghiVest(x, m, n);
+	}
+	if (indice == 3) {
+		cout << "sud." << endl << endl;
+		afisareTriunghiSud(x, m, n);
+	}
+	if (indice == 4) {
+		cout << "est." << endl << endl;
+		afisareTriunghiEst(x, m, n);
+	}
+}
