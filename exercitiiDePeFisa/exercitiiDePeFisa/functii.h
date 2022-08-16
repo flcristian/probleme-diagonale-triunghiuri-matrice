@@ -559,3 +559,31 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 
 	return indiceMaxim;
 }
+
+// Cifra de control.
+
+int cifraDeControl(int n) {
+	while ((n / 10) != 0) {
+		int r = 0;
+		while (n != 0) {
+			r += n % 10;
+			n /= 10;
+		}
+		n = r;
+	}
+	return n;
+}
+
+// Inlocuirea lui k din triunghiul dreptunghic inferior
+// diagonalei secundare cu cifra sa de control.
+
+void inlocuireKDreptunghiSubDiagSec(int x[100][100], int m, int n, int k) {
+	int cifraControl = cifraDeControl(k);
+	for (int i = 0, j = n - 1; i < m; i++, j--) {
+		for (int z = j; z < n; z++) {
+			if (x[i][z] == k) {
+				x[i][z] = cifraControl;
+			}
+		}
+	}
+}

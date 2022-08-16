@@ -227,3 +227,23 @@ void solutiepb2c() {
 		afisareTriunghiEst(x, m, n);
 	}
 }
+
+// 2-d
+// Sa se inlocuiasca toate aparitiile lui k din triunghiul
+// dreptunghic inferior diagonalei secundare cu cifra de 
+// control. (k citit de la tastatura)
+
+void solutiepb2d() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << endl;
+	int k;
+	cout << "Introduceti numarul k : ";
+	cin >> k;
+	cout << endl;
+	inlocuireKDreptunghiSubDiagSec(x, m, n, k);
+	cout << "Matricea dupa aceasta modificare este : " << endl << endl;
+	afisareMatrice(x, m, n);
+}

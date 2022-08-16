@@ -135,7 +135,7 @@ void afisareMatriceTriunghiVest(int x[100][100], int m, int n) {
 			}
 		}
 		else {
-			if (i < z) 
+			if (i < z) {
 				j++;
 			}
 			else {
