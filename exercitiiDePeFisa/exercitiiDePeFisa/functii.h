@@ -829,3 +829,21 @@ void sortareVectorElemCCParaProb2h(int x[100][100], int m, int n) {
 	alipireVector(y, part1, part2, d1, d2);
 	afisareVector(y, c);
 }
+
+// Interschimbarea elementelor din triunghiul superior
+// diagonalei principale cu cele din triunghiul
+// inferior diagonalei secundare.
+
+void interschimbarePentruPb2i(int x[100][100], int m, int n) {
+	int y[100][100];
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			y[i][j] = x[i][j];
+		}
+	}
+	for (int i = 0, i2 = m - 1, j2 = 1; i < m; i++, i2--, j2++) {
+		for (int j = i + 1, k = j2; j < n; j++, k++) {
+			x[i][j] = y[i2][k];
+		}
+	}
+}

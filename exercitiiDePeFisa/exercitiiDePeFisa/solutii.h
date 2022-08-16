@@ -319,6 +319,8 @@ void solutiepb2i() {
 	int x[100][100];
 	citireFisier(x, m, n);
 	afisareMatrice(x, m, n);
-	cout << "Matricea dupa aceasta modificare este : " << endl << endl;
+	interschimbarePentruPb2i(x, m, n);
+	cout << endl << "Matricea dupa aceasta modificare este : " << endl;
+	cout << "Am considerat ca triunghiurile sa nu contina si diagonalele." << endl << endl;
 	afisareMatrice(x, m, n);
 }
