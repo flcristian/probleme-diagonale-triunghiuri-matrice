@@ -587,3 +587,245 @@ void inlocuireKDreptunghiSubDiagSec(int x[100][100], int m, int n, int k) {
 		}
 	}
 }
+
+// Cate cifre distincte are numarul?
+
+int cateCifreDistincte(int n) {
+	int x[100];
+	for (int i = 0; i < 10; i++) {
+		x[i] = 0;
+	}
+	while (n != 0) {
+		x[n % 10]++;
+		n /= 10;
+	}
+	int c = 0;
+	for (int i = 0; i < 10; i++) {
+		if (x[i] > 0) {
+			c++;
+		}
+	}
+	return c;
+}
+
+// Numarul cu cele mai multe cifre distincte de pe diagonala principala.
+
+int elementMaxCifreDistincte(int x[100][100], int m, int n) {
+	int numarul = 0, max = 0;
+	for (int i = 0, j = n - 1; i < m; i++, j--) {
+		int count = cateCifreDistincte(x[i][j]);
+		if (count > max) {
+			numarul = x[i][j];
+			max = count;
+		}
+	}
+	return numarul;
+}
+
+// Apare fiecare numar de la 1-9 o data in vector?
+
+bool esteTipSudokuVectorul(int x[]) {
+	int y[100];
+	for (int i = 0; i < 9; i++) {
+		y[i] = 0;
+	}
+	for (int i = 0; i < 9; i++) {
+		y[x[i] - 1]++;
+	}
+	for (int i = 0; i < 9; i++) {
+		if (y[i] < 1) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Este matricea de Tip Sudoku?
+
+bool tipSudoku(int x[100][100], int m, int n) {
+	if (m != 9 || n != 9) {
+		return false;
+	}
+
+	for (int i = 0; i < m; i++) {
+		int y[100];
+		for (int j = 0; j < n; j++) {
+			y[j] = x[i][j];
+		}
+		if (esteTipSudokuVectorul(y) == 0) {
+			return false;
+		}
+	}
+
+	for (int j = 0; j < n; j++) {
+		int y[100];
+		for (int i = 0; i < m; i++) {
+			y[i] = x[i][j];
+		}
+		if (esteTipSudokuVectorul(y) == 0) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+// Afisarea vectorului format din toate elementele care au cifra de
+// control numar par.
+
+void afisareVectorElementeCifraControlPara(int x[100][100], int m, int n) {
+	int y[100];
+	int c = 0;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (cifraDeControl(x[i][j]) % 2 == 0) {
+				y[c] = x[i][j];
+				c++;
+			}
+		}
+	}
+	afisareVector(y, c);
+}
+
+// Impartire vector in doi vectori.
+
+void impartireVector(int x[], int y[], int z[], int d, int p) {
+	int c = 0;
+	for (int i = 0; i < p; i++) {
+		y[c] = x[i];
+		c++;
+	}
+	c = 0;
+	for (int i = p; i < d; i++) {
+		z[c] = x[i];
+		c++;
+	}
+}
+
+// Alipire vectori intr-un singur vector.
+
+void alipireVector(int x[], int y[], int z[], int d1, int d2) {
+	int c = 0;
+	for (int i = 0; i < d1; i++) {
+		x[c] = y[i];
+		c++;
+	}
+	for (int i = 0; i < d2; i++) {
+		x[c] = z[i];
+		c++;
+	}
+}
+
+// Merge
+
+void merge(int x[], int min, int max, int mid) {
+	int i = min, j = mid + 1, k = 0;
+	int temp[100];
+	while(i <= mid && j <= max) {
+		if (x[i] < x[j]) {
+			temp[k] = x[i];
+			k++;
+			i++;
+		}
+		else {
+			temp[k] = x[j];
+			k++;
+			j++;
+		}
+	}
+	while (i <= mid) {
+		temp[k] = x[i];
+		k++;
+		i++;
+	}
+	while (j <= max) {
+		temp[k] = x[j];
+		k++;
+		j++;
+	}
+	for (i = min; i <= max; i++) {
+		x[i] = temp[i - min];
+	}
+}
+
+// Merge sort
+
+void mergeSort(int x[], int min, int max) {
+	int mid;
+	if (min < max) {
+		mid = (min + max) / 2;
+		mergeSort(x, min, mid);
+		mergeSort(x, mid + 1, max);
+		merge(x, min, max, mid);
+	}
+}
+
+// Merge descrescator.
+
+void mergeDescrescator(int x[], int min, int max, int mid) {
+	int i = min, j = mid + 1, k = 0;
+	int temp[100];
+	while (i <= mid && j <= max) {
+		if (x[i] > x[j]) {
+			temp[k] = x[i];
+			i++;
+		}
+		else {
+			temp[k] = x[j];
+			j++;
+		}
+		k++;
+	}
+	while (i <= mid) {
+		temp[k] = x[i];
+		i++;
+		k++;
+	}
+	while (j <= max) {
+		temp[k] = x[j];
+		j++;
+		k++;
+	}
+	for (i = min; i <= max; i++) {
+		x[i] = temp[i - min];
+	}
+}
+
+// Merge sort descrescator.
+
+void mergeSortDescrescator(int x[], int min, int max) {
+	int mid;
+	if (min < max) {
+		mid = (min + max) / 2;
+		mergeSortDescrescator(x, min, mid);
+		mergeSortDescrescator(x, mid + 1, max);
+		mergeDescrescator(x, min, max, mid);
+	}
+}
+
+// Sortarea vectorului de la punctul anterior dupa enuntul de la 2-h.
+
+void sortareVectorElemCCParaProb2h(int x[100][100], int m, int n) {
+	int y[100];
+	int c = 0;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (cifraDeControl(x[i][j]) % 2 == 0) {
+				y[c] = x[i][j];
+				c++;
+			}
+		}
+	}
+	int mijloc = c / 2;
+	int part1[100], part2[100];
+	int z = 0;
+	if (c % 2 == 1) {
+		z++;
+	}
+	int d1 = mijloc, d2 = mijloc + z;
+	impartireVector(y, part1, part2, c, mijloc);
+	bubbleSort(part1, d1);
+	mergeSortDescrescator(part2, 0, d2 - 1);
+	alipireVector(y, part1, part2, d1, d2);
+	afisareVector(y, c);
+}

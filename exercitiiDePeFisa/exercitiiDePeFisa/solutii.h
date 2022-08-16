@@ -247,3 +247,78 @@ void solutiepb2d() {
 	cout << "Matricea dupa aceasta modificare este : " << endl << endl;
 	afisareMatrice(x, m, n);
 }
+
+// 2-e
+// Care este numarul cu cele mai multe cifre distincte
+// de pe diagonala secundara?
+
+void solutiepb2e() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Numarul cu cele mai multe cifre distincte de pe diagonala principala este : " << elementMaxCifreDistincte(x, m, n) << "." << endl;
+}
+
+// 2-f
+// Sa se verifice daca pe fiecare linie si pe fiecare
+// coloana sunt elementele {1, ..., 9} o singura data
+// (Tip Sudoku)
+
+void solutiepb2f() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << endl;
+	cout << "Matricea";
+	if (tipSudoku(x, m, n)) {
+		cout << " este ";
+	}
+	else {
+		cout << " nu este ";
+	}
+	cout << "de tip sudoku." << endl;
+}
+
+// 2-g
+// Sa se realizeze un vector cu toate elementele
+// ce au cifra de control un numar par.
+
+void solutiepb2g() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << endl << "Vectorul format din elementele cu cifra de control numar par este : " << endl << endl;
+	afisareVectorElementeCifraControlPara(x, m, n);
+}
+
+// 2-h
+// Sortati vectorul de la punctul g. crescator pana la
+// mijloc si descrescator dupa (metodele cu care se 
+// va sorta acest vector trebuie sa fie diferite pentru
+// cele doua sortari)
+
+void solutiepb2h() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << endl << "Vectorul dupa ce a fost sortat crescator folosind metoda Bubble Sort pana la mijlocul vectorului, iar dupa descrescator folosind metoda Merge Sort este :" << endl << endl;
+	sortareVectorElemCCParaProb2h(x, m, n);
+}
+
+// 2-i
+// Interschimbati toate elementele din triunghiul
+// superior diagonalei principale cu elementele
+// din triunghiul inferior diagonalei secundare.
+
+void solutiepb2i() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << "Matricea dupa aceasta modificare este : " << endl << endl;
+	afisareMatrice(x, m, n);
+}
