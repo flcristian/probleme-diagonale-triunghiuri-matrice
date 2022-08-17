@@ -324,3 +324,18 @@ void solutiepb2i() {
 	cout << "Am considerat ca triunghiurile sa nu contina si diagonalele." << endl << endl;
 	afisareMatrice(x, m, n);
 }
+
+// 2-j
+// Interschimbati toate elementele de minim din N
+// cu toate elementele de maxim din S.
+
+void solutiepb2j() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	interschimbarePentruPb2j(x, m, n);
+	cout << endl << "Matricea dupa aceasta modificare este : " << endl;
+	cout << "Am considerat ca triunghiurile sa nu contina si diagonalele." << endl << endl;
+	afisareMatrice(x, m, n);
+}

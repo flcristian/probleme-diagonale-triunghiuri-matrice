@@ -847,3 +847,42 @@ void interschimbarePentruPb2i(int x[100][100], int m, int n) {
 		}
 	}
 }
+
+// Interschimbare minime din N cu maxime din S.
+
+void interschimbarePentruPb2j(int x[100][100], int m, int n) {
+	int min = x[0][1];
+	int max = x[m - 1][1];
+	int z = 0;
+	if (m % 2 == 0) {
+		z++;
+	}
+	for (int i = 0, j = n - 1; i < m / 2; i++, j--) {
+		for (int k = i + 1; k < j; k++) {
+			if (x[i][k] < min) {
+				min = x[i][k];
+			}
+		}
+	}
+	for (int i = m / 2 + 1, j = i - z; i < m; i++, j--) {
+		for (int k = j - 1; k < i; k++) {
+			if (x[i][k] > max) {
+				max = x[i][k];
+			}
+		}
+	}
+	for (int i = 0, j = n - 1; i < m / 2; i++, j--) {
+		for (int k = i + 1; k < j; k++) {
+			if (x[i][k] == min) {
+				x[i][k] = max;
+			}
+		}
+	}
+	for (int i = m / 2 + 1, j = i - z; i < m; i++, j--) {
+		for (int k = j - 1; k < i; k++) {
+			if (x[i][k] == max) {
+				x[i][k] = min;
+			}
+		}
+	}
+}
