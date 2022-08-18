@@ -208,24 +208,8 @@ void solutiepb2c() {
 	citireFisier(x, m, n);
 	afisareMatrice(x, m, n);
 	int indice = careTriunghiMaxNrPrimaUltima(x, m, n);
-	cout << endl;
-	cout << "Triunghiul cu maximul de numere ce au prima cifra egala cu ultima este cel din ";
-	if (indice == 1) {
-		cout << "nord." << endl << endl;
-		afisareTriunghiNord(x, m, n);
-	}
-	if (indice == 2) {
-		cout << "vest." << endl << endl;
-		afisareTriunghiVest(x, m, n);
-	}
-	if (indice == 3) {
-		cout << "sud." << endl << endl;
-		afisareTriunghiSud(x, m, n);
-	}
-	if (indice == 4) {
-		cout << "est." << endl << endl;
-		afisareTriunghiEst(x, m, n);
-	}
+	cout << endl << "Am considerat ca triunghiurile sa nu contina si diagonalele." << endl;
+	afisareTriunghiIsoscelIndice(x, m, n, indice);
 }
 
 // 2-d
@@ -339,3 +323,58 @@ void solutiepb2j() {
 	cout << "Am considerat ca triunghiurile sa nu contina si diagonalele." << endl << endl;
 	afisareMatrice(x, m, n);
 }
+
+// 2-k
+// Sortati descrescator diagonala secundara in functie
+// de suma cifrelor din elemente.
+
+void solutiepb2k() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	matriceDiagSecSortata(x, m, n);
+	cout << endl << "Matricea dupa aceasta modificare este : " << endl << endl;
+	afisareMatrice(x, m, n);
+}
+
+// 2-l
+// Care este triunghiul isoscel ce are cea mai mare
+// frecventa a cifrei k? (k citit de la tastatura)
+
+void solutiepb2l() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	int k;
+	cout << endl << "Introduceti cifra K : ";
+	cin >> k;
+	if (esteCifra(k)) {
+		int indice = triunghiMaxAparitiiCifraK(x, m, n, k);
+		cout << "Am considerat ca triunghiurile sa nu contina si diagonalele." << endl;
+		afisareTriunghiIsoscelIndice(x, m, n, indice);
+	}
+	else {
+		cout << k << " nu este cifra." << endl;
+	}
+}
+
+// 2-m
+// Matricea B este transpusa matricei A. B = ?
+
+void solutiepb2m() {
+	int m = 0, n = 0;
+	int x[100][100], y[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	transpunere(x, y, m, n);
+	cout << endl << "Transpusa lui X este : " << endl << endl;
+	afisareMatrice(y, m, n);
+}
+
+// 2-n
+// Afisati mesajul DA daca elementele de pe diagonala
+// principala sunt multiplii celor de pe diagonala
+// secundara. Metoda de comparare este urmatoarea
+// a[0][0] cu a[0][n-1], a[1][1] cu a[1][n-2], etc.

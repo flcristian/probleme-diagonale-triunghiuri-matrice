@@ -453,7 +453,7 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 	int maxim = 0, count = 0;
 	int indiceMaxim = 0;
 
-	int z = m / 2, s = 0;
+	int z = m / 2, s = 1;
 	if (m % 2 == 0) {
 		z--;
 		s++;
@@ -461,9 +461,9 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 
 	// Verificare triunghi Nord.
 
-	for (int i = 0, j = n; i < m / 2 + 1; i++, j--) {
-		for (int k = i; k < j; k++) {
-			if (primaCifraEgalaUltima(x[i][k])){
+	for (int i = 0, j = n - 1; i < m / 2 + 1; i++, j--) {
+		for (int k = i + 1; k < j; k++) {
+			if (primaCifraEgalaUltima(x[i][k])) {
 				count++;
 			}
 		}
@@ -476,7 +476,7 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 
 	// Verificare triunghi Vest.
 
-	for (int i = 0, j = 1, r = 0; i < m; i++) {
+	for (int i = 0, j = 0, r = 0; i < m; i++) {
 		for (int k = 0; k < j; k++) {
 			if (primaCifraEgalaUltima(x[i][k])) {
 				count++;
@@ -510,8 +510,8 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 
 	// Verificare triunghi Sud.
 
-	for (int i = m / 2, j = i - s; i < m; i++, j--) {
-		for (int k = j; k < i + 1; k++) {
+	for (int i = m / 2 + 1, j = i - s; i < m; i++, j--) {
+		for (int k = j; k < i; k++) {
 			if (primaCifraEgalaUltima(x[i][k])) {
 				count++;
 			}
@@ -522,11 +522,11 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 		indiceMaxim = 3;
 	}
 	count = 0;
-	
+
 	// Verificare triunghi Est.
 
 	for (int i = 0, j = n - 1, r = 0; i < m; i++) {
-		for (int k = j; k < n; k++) {
+		for (int k = j + 1; k < n; k++) {
 			if (primaCifraEgalaUltima(x[i][k])) {
 				count++;
 			}
@@ -559,6 +559,7 @@ int careTriunghiMaxNrPrimaUltima(int x[100][100], int m, int n) {
 
 	return indiceMaxim;
 }
+
 
 // Cifra de control.
 
@@ -886,3 +887,326 @@ void interschimbarePentruPb2j(int x[100][100], int m, int n) {
 		}
 	}
 }
+
+// Suma cifre
+
+int sumaCifre(int n) {
+	int s = 0;
+	while (n != 0) {
+		s += n % 10;
+		n /= 10;
+	}
+	return s;
+}
+
+// Merge sort descrescator dupa suma cifrelor.
+
+void mergeSumaCifreDescrescator(int x[], int min, int mid, int max) {
+	int i = min, j = mid + 1, k = 0;
+	int temp[100];
+	while (i <= mid && j <= max) {
+		if (sumaCifre(x[i]) > sumaCifre(x[j])) {
+			temp[k] = x[i];
+			i++;
+		}
+		else {
+			temp[k] = x[j];
+			j++;
+		}
+		k++;
+	}
+	while (i <= mid) {
+		temp[k] = x[i];
+		i++;
+		k++;
+	}
+	while (j <= max) {
+		temp[k] = x[j];
+		j++;
+		k++;
+	}
+	for (i = min; i <= max; i++) {
+		x[i] = temp[i - min];
+	}
+}
+
+void mergeSortSumaCifreDescrescator(int x[], int min, int max) {
+	int mid;
+	if (min < max) {
+		mid = (min + max) / 2;
+		mergeSortSumaCifreDescrescator(x, min, mid);
+		mergeSortSumaCifreDescrescator(x, mid + 1, max);
+		mergeSumaCifreDescrescator(x, min, mid, max);
+	}
+}
+
+// Sortare diagonala secundare dupa suma cifrelor descrescator.
+
+void matriceDiagSecSortata(int x[100][100], int m, int n) {
+	int y[100];
+	int c = 0;
+	for (int i = 0, j = n - 1; i < m; i++, j--) {
+		y[c] = x[i][j];
+		c++;
+	}
+	mergeSortSumaCifreDescrescator(y, 0, c - 1);
+	c = 0;
+	for (int i = 0, j = n - 1; i < m; i++, j--) {
+		x[i][j] = y[c];
+		c++;
+	}
+}
+
+// De cate ori apare cifra K.
+
+int countAparitiiCifraK(int n, int k) {
+	int c = 0;
+	while (n != 0) {
+		if (n % 10 == k) {
+			c++;
+		}
+		n /= 10;
+	}
+	return c;
+}
+
+// Este cifra numarul?
+
+bool esteCifra(int n) {
+	if (n / 10 == 0) {
+		return true;
+	}
+	return false;
+}
+
+// Care triunghi isoscel are frencventa maxima de aparitii a cifrei K?
+
+int triunghiMaxAparitiiCifraK(int x[100][100], int m, int n, int f) {
+	int maxim = 0, count = 0;
+	int indiceMaxim = 0;
+
+	int z = m / 2, s = 1;
+	if (m % 2 == 0) {
+		z--;
+		s++;
+	}
+
+	// Verificare triunghi Nord.
+
+	for (int i = 0, j = n - 1; i < m / 2 + 1; i++, j--) {
+		for (int k = i + 1; k < j; k++) {
+			count += countAparitiiCifraK(x[i][k], f);
+		}
+	}
+	if (count > maxim) {
+		maxim = count;
+		indiceMaxim = 1;
+	}
+	count = 0;
+
+	// Verificare triunghi Vest.
+
+	for (int i = 0, j = 0, r = 0; i < m; i++) {
+		for (int k = 0; k < j; k++) {
+			count += countAparitiiCifraK(x[i][k], f);
+		}
+		if (m % 2 == 0) {
+			if (i >= z) {
+				r++;
+			}
+			if (r == 0) {
+				j++;
+			}
+			if (r > 1) {
+				j--;
+			}
+		}
+		else {
+			if (i < z) {
+				j++;
+			}
+			else {
+				j--;
+			}
+		}
+	}
+	if (count > maxim) {
+		maxim = count;
+		indiceMaxim = 2;
+	}
+	count = 0;
+
+	// Verificare triunghi Sud.
+
+	for (int i = m / 2 + 1, j = i - s; i < m; i++, j--) {
+		for (int k = j; k < i; k++) {
+			count += countAparitiiCifraK(x[i][k], f);
+		}
+	}
+	if (count > maxim) {
+		maxim = count;
+		indiceMaxim = 3;
+	}
+	count = 0;
+
+	// Verificare triunghi Est.
+
+	for (int i = 0, j = n - 1, r = 0; i < m; i++) {
+		for (int k = j + 1; k < n; k++) {
+			count += countAparitiiCifraK(x[i][k], f);
+		}
+		if (m % 2 == 0) {
+			if (i >= z) {
+				r++;
+			}
+			if (r == 0) {
+				j--;
+			}
+			if (r > 1) {
+				j++;
+			}
+		}
+		else {
+			if (i < z) {
+				j--;
+			}
+			else {
+				j++;
+			}
+		}
+	}
+	if (count > maxim) {
+		maxim = count;
+		indiceMaxim = 4;
+	}
+	count = 0;
+
+	return indiceMaxim;
+}
+
+// Afisare triunghi din Nord fara diagonale.
+
+void afisareTriunghiNordFaraDiag(int x[100][100], int m, int n) {
+	for (int i = 0, j = n - 1; i < m / 2; i++, j--) {
+		for (int k = i + 1; k < j; k++) {
+			cout << x[i][k] << " ";
+		}
+		cout << endl;
+	}
+}
+
+// Afisare triunghi din Vest fara diagonale.
+
+void afisareTriunghiVestFaraDiag(int x[100][100], int m, int n) {
+	int z = m / 2;
+	if (m % 2 == 0) {
+		z--;
+	}
+	for (int i = 0, j = 0, r = 0; i < m; i++) {
+		for (int k = 0; k < j; k++) {
+			cout << x[i][k] << " ";
+		}
+		if (m % 2 == 0) {
+			if (i >= z) {
+				r++;
+			}
+			if (r == 0) {
+				j++;
+			}
+			if (r > 1) {
+				j--;
+			}
+		}
+		else {
+			if (i < z) {
+				j++;
+			}
+			else {
+				j--;
+			}
+		}
+		cout << endl;
+	}
+}
+
+// Afisare triunghi din Sud fara diagonale.
+
+void afisareTriunghiSudFaraDiag(int x[100][100], int m, int n) {
+	int z = 1;
+	if (m % 2 == 0) {
+		z++;
+	}
+	for (int i = m / 2 + 1, j = i - z; i < m; i++, j--) {
+		for (int k = j; k < i; k++) {
+			cout << x[i][k] << " ";
+		}
+		cout << endl;
+	}
+}
+
+// Afisare triunghi din Est fara diagonale.
+
+void afisareTriunghiEstFaraDiag(int x[100][100], int m, int n) {
+	int z = m / 2;
+	if (m % 2 == 0) {
+		z--;
+	}
+	for (int i = 0, j = n - 1, r = 0; i < m; i++) {
+		for (int k = j + 1; k < n; k++) {
+			cout << x[i][k] << " ";
+		}
+		if (m % 2 == 0) {
+			if (i >= z) {
+				r++;
+			}
+			if (r == 0) {
+				j--;
+			}
+			if (r > 1) {
+				j++;
+			}
+		}
+		else {
+			if (i < z) {
+				j--;
+			}
+			else {
+				j++;
+			}
+		}
+		cout << endl;
+	}
+}
+
+// Afisare triunghi isoscel din matrice in functie de indice.
+
+void afisareTriunghiIsoscelIndice(int x[100][100], int m, int n, int indice) {
+	cout << "Triunghiul este cel din ";
+	if (indice == 1) {
+		cout << "nord." << endl;
+		afisareTriunghiNordFaraDiag(x, m, n);
+	}
+	if (indice == 2) {
+		cout << "vest." << endl;
+		afisareTriunghiVestFaraDiag(x, m, n);
+	}
+	if (indice == 3) {
+		cout << "sud." << endl;
+		afisareTriunghiSudFaraDiag(x, m, n);
+	}
+	if (indice == 4) {
+		cout << "est." << endl;
+		afisareTriunghiEstFaraDiag(x, m, n);
+	}
+}
+
+// Transpunerea matricei X in matricea Y.
+
+void transpunere(int x[100][100], int y[100][100], int m, int n) {
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			y[i][j] = x[j][i];
+		}
+	}
+}
+
