@@ -378,3 +378,18 @@ void solutiepb2m() {
 // principala sunt multiplii celor de pe diagonala
 // secundara. Metoda de comparare este urmatoarea
 // a[0][0] cu a[0][n-1], a[1][1] cu a[1][n-2], etc.
+
+void solutiepb2n() {
+	int m = 0, n = 0;
+	int x[100][100];
+	citireFisier(x, m, n);
+	afisareMatrice(x, m, n);
+	cout << endl << "Elementele din diagonala principala";
+	if (elemDiagPrinMultipluElemDiagSec(x, m, n)) {
+		cout << " sunt ";
+	}
+	else {
+		cout << " nu sunt ";
+	}
+	cout << "multiplii celor din diagonala secundara." << endl;
+}

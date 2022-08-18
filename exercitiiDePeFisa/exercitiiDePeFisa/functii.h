@@ -1210,3 +1210,22 @@ void transpunere(int x[100][100], int y[100][100], int m, int n) {
 	}
 }
 
+// Este X multiplu de Y?
+
+bool esteXMultipluDeY(int x, int y) {
+	if (x % y == 0) {
+		return true;
+	}
+	return false;
+}
+
+// Sunt elementele din diagonala principala multiplii elementelor din diagonala secundara?
+
+bool elemDiagPrinMultipluElemDiagSec(int x[100][100], int m, int n) {
+	for (int i = 0, j = n - 1; i < m; i++, j--) {
+		if (esteXMultipluDeY(x[i][i], x[i][j]) == 0) {
+			return false;
+		}
+	}
+	return true;
+}
